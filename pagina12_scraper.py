@@ -67,9 +67,11 @@ def get_content(all_links, today):
             }
 
             data_return.append(data)
-            # response = requests.get(img_src)
-            # with open('{}/{}.{}.png'.format(today, idx + 1, title), 'wb') as f:
-            #     f.write(response.content)
+            # extract images
+            response = requests.get(img_src)
+            if response.status_code == 200:
+                with open('{}/{}.{}.png'.format(today, idx + 1, title), 'wb') as f:
+                    f.write(response.content)
             # create docx
             doc = docx.Document()
             doc.add_paragraph(title)
